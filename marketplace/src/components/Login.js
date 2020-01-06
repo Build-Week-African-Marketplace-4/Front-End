@@ -21,14 +21,8 @@ const Login = props => {
   const useStyles = makeStyles(theme => ({
     root: {
       display: "flex",
-      flexWrap: "wrap",
-      flexDirection: "column"
-    },
-    margin: {
-      margin: theme.spacing(1)
-    },
-    withoutLabel: {
-      marginTop: theme.spacing(3)
+      justifyContent: "center",
+      margin: "auto",
     },
     textField: {
       width: 200
@@ -36,8 +30,7 @@ const Login = props => {
   }));
 
   const classes = useStyles();
-
-  // On submit to POST user to api //
+  
   const onSubmit = event => {
     event.preventDefault();
     console.log(values);
@@ -55,9 +48,9 @@ const Login = props => {
 
   return (
     <>
-      <Paper component="div" className={classes.root}>
-        <div className="paper-container">
-          <form onSubmit={onSubmit}>
+      <Paper>
+        <div className="login-form">
+          <form className="form" onSubmit={onSubmit}>
             <TextField
               name="username"
               label="Username"
@@ -77,7 +70,8 @@ const Login = props => {
               value={values.password}
               onChange={handleChange}
             />
-
+          </form>
+          <div>
             <Button
               type="submit"
               variant="contained"
@@ -86,11 +80,7 @@ const Login = props => {
             >
               Log In
             </Button>
-          </form>
-          <div className="register">
-            <Typography variant="subtitle2" component="p">
-              Not signed up?
-            </Typography>
+            <Typography variant="subtitle2">Not signed up?</Typography>
             <Link to="/">
               <Button color="primary" className={classes.button}>
                 Register
