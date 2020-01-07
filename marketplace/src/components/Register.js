@@ -56,7 +56,7 @@ const Register = props => {
       .post("https://africanmarket2.herokuapp.com/api/auth/register", values)
       .then(response => {
         console.log(response, props);
-        // localStorage.setItem("token");
+        window.localStorage.setItem("token", response.data.token);
         props.history.push("/login");
       })
       .catch(error => console.log("Login Error", error.response));
@@ -111,7 +111,9 @@ const Register = props => {
           <div className="login">
             <Typography variant="subtitle2">Already signed up?</Typography>
             <Link to="/login">
-              <Button color="primary" onClick={() => console.log("clicked")}>
+              <Button 
+                color="primary" 
+                onClick={() => console.log("clicked")}>
                 Log In
               </Button>
             </Link>

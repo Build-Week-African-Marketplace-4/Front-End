@@ -5,12 +5,11 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import axios from "axios";
+import axios from "axios"
 
 const Login = props => {
   const [values, setValues] = React.useState({
     username: "",
-    email: "",
     password: ""
   });
 
@@ -22,7 +21,10 @@ const Login = props => {
     root: {
       display: "flex",
       justifyContent: "center",
-      margin: "auto",
+      margin: "auto"
+    },
+    margin: {
+      margin: theme.spacing(1)
     },
     textField: {
       width: 200
@@ -33,15 +35,14 @@ const Login = props => {
   
   const onSubmit = event => {
     event.preventDefault();
-    console.log(values);
-    axios
-      .post(" https://africanmarket2.herokuapp.com/api/auth/login", values)
 
+    axios
+      .post("https://africanmarket2.herokuapp.com/api/auth/login", values)
       .then(response => {
-        console.log(response.data);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("userId", response.data.id);
         props.history.push("/protected");
+        console.log(response);
       })
       .catch(error => console.log("Login Error", error.response));
   };
@@ -70,19 +71,20 @@ const Login = props => {
               value={values.password}
               onChange={handleChange}
             />
-          </form>
-          <div>
             <Button
               type="submit"
               variant="contained"
               color="primary"
               className={classes.button}
+              onClick={() => console.log("clicked")}
             >
               Log In
             </Button>
             <Typography variant="subtitle2">Not signed up?</Typography>
+          </form>
+          <div>
             <Link to="/">
-              <Button color="primary" className={classes.button}>
+              <Button color="primary" type="submit" className={classes.button}>
                 Register
               </Button>
             </Link>
