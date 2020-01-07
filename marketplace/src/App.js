@@ -3,10 +3,11 @@ import "./App.css";
 import Login from "./components/Login";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Register from "./components/Register"
-import Categories from "./components/Categories"
+import Dashboard from "./components/Dashboard"
 import PrivateRoute from "./components/PrivateRoute";
 import AddItem from "./components/AddItem";
 import Form from "./components/NewItem";
+import ItemsList from "./components/ItemsList";
 
 function App() {
   const [item, setItem] = useState([]);
@@ -14,7 +15,7 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <PrivateRoute path="/protected" component={Categories} />
+          <PrivateRoute path="/protected" component={Dashboard} />
           <Route path="/login" component={Login} />
           <Route exact path="/" component={Register} />
           <Route
@@ -24,6 +25,7 @@ function App() {
             )}
           />
           <Route path="/newItem" component={Form} />
+          <Route path="/itemsList" component={ItemsList} />
         </Switch>
       </div>
     </Router>

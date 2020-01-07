@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import ItemCard from './ItemCards';
-import NewItem from './NewItem';
 import { Button } from "@material-ui/core";
 import axiosWithAuth from '../utils/AxiosWithAuth';
 import { Link } from "react-router-dom";
@@ -28,13 +27,10 @@ export default function Dashboard() {
 
   return(
     <>
-      <h1>Hello User!</h1>
+      <h1>All Items For Sale</h1>
       <nav>
-        <Link to="/itemsList">
-          <Button>Browse</Button>
-        </Link>
+
       </nav>
-      <NewItem/>
       <div style={divStyle}>
         {items.map(item => (
           <ItemCard 

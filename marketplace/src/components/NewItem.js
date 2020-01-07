@@ -74,9 +74,9 @@ const Form = props => {
       })}
     >
       <form onSubmit={onSubmit}>
-          <div>
-              <h1>Sell An Item!</h1>
-          </div>
+        <div>
+          <h1>Sell An Item!</h1>
+        </div>
         <div className={classes.root}>
           <Box
             border={1}
@@ -127,6 +127,17 @@ const Form = props => {
                   variant="outlined"
                   margin="normal"
                   value={values.country}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid xs={12}>
+                <TextField
+                  className={classes.TextField}
+                  name="description"
+                  label="Description"
+                  margin="normal"
+                  variant="outlined"
+                  value={values.name}
                   onChange={handleChange}
                 />
               </Grid>
