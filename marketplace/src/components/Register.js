@@ -5,11 +5,13 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import axios from "axios"
+import axios from "axios";
+// import { createMuiTheme } from "@material-ui/core/styles";
 
-const Login = props => {
+const Register = props => {
   const [values, setValues] = React.useState({
     username: "",
+    email: "",
     password: ""
   });
 
@@ -20,29 +22,42 @@ const Login = props => {
   const useStyles = makeStyles(theme => ({
     root: {
       display: "flex",
-      justifyContent: "center",
-      margin: "auto"
-    },
-    margin: {
-      margin: theme.spacing(1)
+      flexWrap: "wrap",
+      flexDirection: "column"
     },
     textField: {
-      width: 200
-    }
+      width: 375
+    },
   }));
 
+//   const theme = createMuiTheme({
+//     palette: {
+//       primary: {
+//         light: "#757ce8",
+//         main: "#3f50b5",
+//         dark: "#002884",
+//         contrastText: "#fff"
+//       },
+//       secondary: {
+//         light: "#ff7961",
+//         main: "#f44336",
+//         dark: "#ba000d",
+//         contrastText: "#000"
+//       }
+//     }
+//   });
+
   const classes = useStyles();
-  
+
   const onSubmit = event => {
     event.preventDefault();
 
     axios
-      .post("https://africanmarket2.herokuapp.com/api/auth/login", values)
+      .post("https://africanmarket2.herokuapp.com/api/auth/register", values)
       .then(response => {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data.id);
-        props.history.push("/protected");
-        console.log(response);
+        console.log(response, props);
+        window.localStorage.setItem("token", response.data.token);
+        props.history.push("/login");
       })
       .catch(error => console.log("Login Error", error.response));
   };
@@ -50,8 +65,8 @@ const Login = props => {
   return (
     <>
       <Paper>
-        <div className="login-form">
-          <form className="form" onSubmit={onSubmit}>
+        <div className="register">
+          <form onSubmit={onSubmit}>
             <TextField
               name="username"
               label="Username"
@@ -61,6 +76,18 @@ const Login = props => {
               value={values.username}
               onChange={handleChange}
             />
+
+            <TextField
+              name="email"
+              label="Email"
+              type="email"
+              className={`${classes.textField} input`}
+              margin="normal"
+              variant="outlined"
+              value={values.email}
+              onChange={handleChange}
+            />
+
             <TextField
               name="password"
               label="Password"
@@ -71,21 +98,23 @@ const Login = props => {
               value={values.password}
               onChange={handleChange}
             />
+
             <Button
               type="submit"
               variant="contained"
-              color="primary"
-              className={classes.button}
-              onClick={() => console.log("clicked")}
+              className="button"
             >
-              Log In
+              Register
             </Button>
-            <Typography variant="subtitle2">Not signed up?</Typography>
           </form>
-          <div>
-            <Link to="/">
-              <Button color="primary" type="submit" className={classes.button}>
-                Register
+
+          <div className="login">
+            <Typography variant="subtitle2">Already signed up?</Typography>
+            <Link to="/login">
+              <Button 
+                color="primary" 
+                onClick={() => console.log("clicked")}>
+                Log In
               </Button>
             </Link>
           </div>
@@ -94,4 +123,4 @@ const Login = props => {
     </>
   );
 };
-export default Login;
+export default Register;
