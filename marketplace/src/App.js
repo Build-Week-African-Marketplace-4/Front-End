@@ -9,10 +9,7 @@ import AddItem from "./components/AddItem";
 import Form from "./components/NewItem";
 
 function App() {
-<<<<<<< HEAD
-=======
   const [item, setItem] = useState([]);
->>>>>>> 097836a5dc413848438c9b6446a2c151c8785a17
   return (
     <Router>
       <div className="App">
