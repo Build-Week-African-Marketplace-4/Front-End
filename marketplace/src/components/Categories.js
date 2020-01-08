@@ -1,5 +1,9 @@
 import React from 'react';
 
+const navStyle = {
+  
+}
+
 export default function Categories() {
   return (
     <>

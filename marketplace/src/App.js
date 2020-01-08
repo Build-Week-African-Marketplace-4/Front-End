@@ -8,11 +8,13 @@ import PrivateRoute from "./components/PrivateRoute";
 import AddItem from "./components/AddItem";
 import Form from "./components/NewItem";
 import ItemsList from "./components/ItemsList";
+import Navigation from "./components/Navigation";
 
 function App() {
   const [item, setItem] = useState([]);
   return (
     <Router>
+      <Navigation/>
       <div className="App">
         <Switch>
           <PrivateRoute path="/protected" component={Dashboard} />
