@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 const divStyle = {
   display: 'flex',
   width: '100%',
+  justifyContent: 'space-evenly',
+  alignItems: 'center',
   flexFlow: 'wrap'
 }
 

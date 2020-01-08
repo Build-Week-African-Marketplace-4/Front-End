@@ -8,15 +8,19 @@ import { Link } from "react-router-dom";
 const divStyle = {
   display: 'flex',
   width: '100%',
+  justifyContent: 'space-evenly',
+  alignItems: 'center',
   flexFlow: 'wrap'
 }
 
 export default function Dashboard() {
   const [items, userItems] = useState([]);
+  console.log(localStorage);
+  const id = localStorage.getItem("userId");
 
   useEffect(effect => {
     axiosWithAuth()
-      .get('api/item/')
+      .get(`api/user/${id}`)
       .then(response => {
         console.log('This is the response', response);
         userItems(response.data);
@@ -29,11 +33,6 @@ export default function Dashboard() {
   return(
     <>
       <h1>Hello User!</h1>
-      <nav>
-        <Link to="/itemsList">
-          <Button>Browse</Button>
-        </Link>
-      </nav>
       <NewItem/>
       <div style={divStyle}>
         {items.map(item => (
