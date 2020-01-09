@@ -23,7 +23,7 @@ export default function Dashboard() {
       .get(`api/user/${id}`)
       .then(response => {
         console.log('This is the response', response);
-        userItems(response.data);
+        userItems(response.data.user.items);
       })
       .catch(error => {
         console.log('Error:', error);
