@@ -11,6 +11,7 @@ const MyButton = styled(Button)({
   height: 48,
   width: 140,
   padding: '0 5px',
+  fontWeight: '700',
 });
 
 const navStyle = {
@@ -24,7 +25,6 @@ const navStyle = {
 
 const linkStyle = {
   textDecoration: 'none',
-  fontWeight: '700'
 }
 
 export default function Navigation() {
