@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ItemCard from './ItemCards';
 import NewItem from './NewItem';
-import { Button } from "@material-ui/core";
 import axiosWithAuth from '../utils/AxiosWithAuth';
-import { Link } from "react-router-dom";
 
 const divStyle = {
   display: 'flex',
@@ -15,6 +13,7 @@ const divStyle = {
 
 export default function Dashboard() {
   const [items, userItems] = useState([]);
+  const [user, setUser] = useState();
   console.log(localStorage);
   const id = localStorage.getItem("userId");
 
@@ -23,7 +22,8 @@ export default function Dashboard() {
       .get(`api/user/${id}`)
       .then(response => {
         console.log('This is the response', response);
-        userItems(response.data);
+        userItems(response.data.user.items);
+        setUser(response.data.user.first_name);
       })
       .catch(error => {
         console.log('Error:', error);
@@ -32,8 +32,9 @@ export default function Dashboard() {
 
   return(
     <>
-      <h1>Hello User!</h1>
+      <h1>Hello {user}!</h1>
       <NewItem/>
+      <h1>Your Items:</h1>
       <div style={divStyle}>
         {items.map(item => (
           <ItemCard 

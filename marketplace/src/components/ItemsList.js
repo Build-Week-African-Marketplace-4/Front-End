@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ItemCard from './ItemCards';
-import { Button } from "@material-ui/core";
 import axiosWithAuth from '../utils/AxiosWithAuth';
-import { Link } from "react-router-dom";
 
 const divStyle = {
   display: 'flex',

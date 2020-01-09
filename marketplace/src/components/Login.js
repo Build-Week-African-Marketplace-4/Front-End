@@ -40,7 +40,7 @@ const Login = props => {
       .post("https://africanmarket2.herokuapp.com/api/auth/login", values)
       .then(response => {
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data.id);
+        localStorage.setItem("userId", response.data.login.id);
         props.history.push("/protected");
         console.log(response);
       })
