@@ -9,7 +9,8 @@ const MyButton = styled(Button)({
   borderRadius: 3,
   color: 'white',
   height: 48,
-  padding: '0 30px',
+  width: 140,
+  padding: '0 5px',
 });
 
 const navStyle = {
@@ -22,7 +23,8 @@ const navStyle = {
 }
 
 const linkStyle = {
-  textDecoration: 'none'
+  textDecoration: 'none',
+  fontWeight: '700'
 }
 
 export default function Navigation() {
