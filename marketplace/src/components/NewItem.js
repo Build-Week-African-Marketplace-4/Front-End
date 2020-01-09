@@ -54,11 +54,12 @@ const Form = props => {
         delete values[property];
       }
     });
-    axiosWithAuth
+    axiosWithAuth()
     .post("api/item", values)
       .then(response => {
         console.log(response, props);
-        // localStorage.setItem("token");
+        localStorage.setItem("token");
+        localStorage.setItem("user_id", response.data.user.id);
         props.history.push("/itemList");
       })
       .catch(error => console.log("Creating Item Error", error.response));
@@ -144,7 +145,6 @@ const Form = props => {
             </Grid>
           </Box>
         </div>
-        <Link to="/confirm">
           <Button 
           type="submit" 
           variant="contained" 
@@ -153,7 +153,6 @@ const Form = props => {
           >
             Submit!
           </Button>
-        </Link>
       </form>
     </Formik>
   );

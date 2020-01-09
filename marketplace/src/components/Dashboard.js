@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   useEffect(effect => {
     axiosWithAuth()
-      .get('api/item/')
+      .get(`api/item/:id`)
       .then(response => {
         console.log('This is the response', response);
         userItems(response.data);
