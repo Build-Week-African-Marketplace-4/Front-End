@@ -36,6 +36,7 @@ export default function Dashboard() {
       <div style={divStyle}>
         {items.map(item => (
           <UserItemCard 
+          id={item.id}
           key={item.id} 
           name={item.name} 
           price={item.price} 

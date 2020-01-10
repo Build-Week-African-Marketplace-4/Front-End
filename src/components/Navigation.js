@@ -26,6 +26,10 @@ const navStyle = {
 const linkStyle = {
   textDecoration: 'none',
 }
+const logOut = e => {
+  window.localStorage.removeItem("token")
+}
+
 
 export default function Navigation() {
 
@@ -46,7 +50,7 @@ export default function Navigation() {
           </MyButton>
         </Link>
         <Link style={linkStyle} to="/">
-          <MyButton variant="contained" color="primary">
+          <MyButton onClick={logOut} variant="contained" color="primary">
             Log Out
           </MyButton>
         </Link>

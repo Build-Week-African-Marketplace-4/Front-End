@@ -1,20 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { Grid, Box } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { Button } from "@material-ui/core";
 import axiosWithAuth from "../utils/AxiosWithAuth";
-import {
-  Card,
-  CardHeader,
-  Fab,
-} from "@material-ui/core";
-import {Link} from "react-router-dom"
-import IconButton from "@material-ui/core/IconButton";
+import { CardHeader, Fab } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,29 +30,54 @@ const useStyles = makeStyles(theme => ({
   paper: {
     textAlign: "center",
     textAlign: "center"
-  },
+  }
 }));
 
-const UserItemCard = props => {
-  const classes = useStyles();
+const initialUser = {
+ name: null,
+ price: null,
+ city: null,
+ country: null,
+ description: null,
+};
+
+const EditItem = props => {
   const [editing, setEditing] = useState(false);
-  const [event, setEvent] = useState(props.event);
-
-  const handleChange = event => {
-    setEvent(event.target.value);
-  };
-
-  const deleteItem = e => {
-    e.preventDefault();
-    console.log(deleteItem);
+  const [userToEdit, setUserToEdit] = useState(initialUser);
+  const classes = useStyles();
+  const id = localStorage.getItem("userId");
+  
+  useEffect(() => {
+       console.log(props);
     axiosWithAuth()
-      .delete(`api/item/${props.id}`)
-      .then(() => {
-        window.location.reload();
+      .get(`api/item/${props.match.params.id}`)
+      .then(res => {
+        console.log(res.data);
+        setUserToEdit({ ...res.data });
       })
       .catch(err => {
         console.log(err);
       });
+  }, []);
+
+  console.log(props);
+  const saveEdit = e => {
+    e.preventDefault();
+    Object.keys(userToEdit).forEach(property => {
+      if (!userToEdit[property]) {
+        delete userToEdit[property];
+      }
+    });
+    console.log(userToEdit);
+    axiosWithAuth()
+      .put(`api/item/${props.match.params.id}`, userToEdit)
+      .then(response => {
+        console.log("put res data", response.data);
+        props.history.push("/protected");
+      });
+  };
+  const handleChange = event => {
+    setUserToEdit({ ...userToEdit, [event.target.name]: event.target.value });
   };
 
   return (
@@ -80,27 +99,6 @@ const UserItemCard = props => {
               p={2}
               className={classes.box}
             >
-              <CardHeader
-                action={
-                  <div className={classes.header}>
-                    <Link to={`/editItem/${props.id}`}>
-                      <IconButton size="small" color="secondary">
-                        <EditIcon />
-                      </IconButton>
-                    </Link>
-
-                    <IconButton
-                      size="small"
-                      color="primary"
-                      aria-label="delete"
-                      className={classes.fab}
-                      onClick={deleteItem}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </div>
-                }
-              />
               <Grid container spacing={2} className={classes.root}>
                 <Grid xs={6}>
                   <TextField
@@ -157,6 +155,15 @@ const UserItemCard = props => {
                     onChange={handleChange}
                   />
                 </Grid>
+                <Link to="/">
+                  <Button
+                    onClick={saveEdit}
+                    variant="contained"
+                    color="secondary"
+                  >
+                    Save
+                  </Button>
+                </Link>
               </Grid>
             </Box>
           </div>
@@ -166,4 +173,4 @@ const UserItemCard = props => {
   );
 };
 
-export default UserItemCard;
+export default EditItem;

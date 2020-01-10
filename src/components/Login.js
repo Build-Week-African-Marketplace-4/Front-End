@@ -28,6 +28,21 @@ const Login = props => {
     },
     textField: {
       width: 200
+    },
+    button: {
+      width: 100,
+      marginTop: 16,
+      marginLeft: 5,
+      height: 55
+    
+    },
+    text: {
+      marginLeft: 5,
+      width: 150,
+      padding: 0 
+    },
+    top: {
+      marginTop: 50
     }
   }));
 
@@ -49,13 +64,14 @@ const Login = props => {
 
   return (
     <>
-      <Paper>
+      <Paper elevation={20} >
         <div className="login-form">
-          <form className="form" onSubmit={onSubmit}>
+          <form className="form" className = {classes.top} onSubmit={onSubmit}>
             <TextField
               name="username"
               label="Username"
               className={`${classes.textField} input`}
+              className={classes.text}
               margin="normal"
               variant="outlined"
               value={values.username}
@@ -65,6 +81,7 @@ const Login = props => {
               name="password"
               label="Password"
               className={`${classes.textField} input`}
+              className={classes.text}
               type="password"
               margin="normal"
               variant="outlined"
