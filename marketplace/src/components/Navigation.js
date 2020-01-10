@@ -8,8 +8,8 @@ const MyButton = styled(Button)({
   border: 0,
   borderRadius: 3,
   color: 'white',
-  height: 48,
-  width: 140,
+  height: 35,
+  width: 130,
   padding: '0 5px',
   fontWeight: '700',
 });
@@ -20,7 +20,7 @@ const navStyle = {
   flexFlow: 'row',
   justifyContent: 'space-evenly',
   alignItems: 'center',
-  height: '60px'
+  height: '55px'
 }
 
 const linkStyle = {

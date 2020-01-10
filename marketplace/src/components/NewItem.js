@@ -48,11 +48,6 @@ const NewItem = props => {
 
   const saveEdit = e => {
     e.preventDefault();
-    Object.keys(userToEdit).forEach(property => {
-      if (!userToEdit[property]) {
-        delete userToEdit[property];
-      }
-    });
     console.log(userToEdit)
     axiosWithAuth()
     .post("api/item", userToEdit)

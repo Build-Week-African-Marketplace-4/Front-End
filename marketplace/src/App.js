@@ -8,8 +8,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import NewItem from "./components/NewItem";
 import ItemsList from "./components/ItemsList";
 import Navigation from "./components/Navigation";
-import EditItem from "./components/EditItem"
-
+import UserItemCard from "./components/UserItemCard"
 function App() {
   const [item, setItem] = useState([]);
   return (
@@ -21,10 +20,19 @@ function App() {
           <Route path="/login" component={Login} />
           <Route exact path="/" component={Register} />
           <Route path="/itemsList" component={ItemsList} />
-          <Route path="/newItem" component= {NewItem} />
-          <Route path="/edititem" component = {EditItem}/>
+          <Route
+            path="/protected/:id"
+            render={props => (
+              <UserItemCard {...props} setItem={setItem} item={item} />
             )}
           />
+          <Route
+            path="/newItem"
+            render={props => (
+              <NewItem {...props} setItem={setItem} item={item} />
+            )}
+          />
+          )} />
         </Switch>
       </div>
     </Router>
