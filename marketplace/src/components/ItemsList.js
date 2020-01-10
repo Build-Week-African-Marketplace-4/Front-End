@@ -28,9 +28,6 @@ export default function Dashboard() {
   return(
     <>
       <h1>All Items For Sale</h1>
-      <nav>
-
-      </nav>
       <div style={divStyle}>
         {items.map(item => (
           <ItemCard 

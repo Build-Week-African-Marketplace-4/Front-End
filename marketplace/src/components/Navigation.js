@@ -29,21 +29,29 @@ const linkStyle = {
 
 export default function Navigation() {
 
-  return(
+  return (
     <>
       <nav style={navStyle}>
-        <h1 style={{color: "white"}}>Sauti.Africa</h1>
         <Link style={linkStyle} to="/protected">
-          <MyButton variant="contained" color="primary">Sell An Item</MyButton>
+          <h1 style={{ color: "white" }}>Sauti.Africa</h1>
+        </Link>
+        <Link style={linkStyle} to="/newItem">
+          <MyButton variant="contained" color="primary">
+            Sell An Item
+          </MyButton>
         </Link>
         <Link style={linkStyle} to="/itemsList">
-          <MyButton variant="contained" color="primary">Browse Items</MyButton>
+          <MyButton variant="contained" color="primary">
+            Browse Items
+          </MyButton>
         </Link>
         <Link style={linkStyle} to="/">
-          <MyButton variant="contained" color="primary">Log Out</MyButton>
+          <MyButton variant="contained" color="primary">
+            Log Out
+          </MyButton>
         </Link>
       </nav>
     </>
-  )
+  );
 
 }

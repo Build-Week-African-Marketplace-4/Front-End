@@ -30,8 +30,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-
 const ItemCard = props => {
 
   const classes = useStyles();

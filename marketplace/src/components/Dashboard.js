@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import ItemCard from './ItemCards';
-import NewItem from './NewItem';
 import axiosWithAuth from '../utils/AxiosWithAuth';
 
 const divStyle = {
@@ -16,6 +15,7 @@ export default function Dashboard() {
   const [user, setUser] = useState();
   console.log(localStorage);
   const id = localStorage.getItem("userId");
+
 
   useEffect(effect => {
     axiosWithAuth()
@@ -33,8 +33,7 @@ export default function Dashboard() {
   return(
     <>
       <h1>Hello {user}!</h1>
-      <NewItem/>
-      <h1>Your Items:</h1>
+      <h1>These Are Your Items:</h1>
       <div style={divStyle}>
         {items.map(item => (
           <ItemCard 

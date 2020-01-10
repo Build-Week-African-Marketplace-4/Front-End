@@ -1,12 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { Grid, Box } from "@material-ui/core";
 import axiosWithAuth from "../utils/AxiosWithAuth";
 import { Button } from "@material-ui/core";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
 import { Formik } from "formik";
+import { Link } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,35 +33,38 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Form = props => {
-  const [values, setValues] = React.useState({
-    name: null,
-    price: null,
-    city: null,
-    country: null,
-  });
-  const handleChange = event => {
-    setValues({ ...values, [event.target.name]: event.target.value });
-  };
+const newItem = {
+  name: null,
+  price: null,
+  city: null,
+  country: null,
+  description: null,
+  user_id: Number(localStorage.getItem("userId"))
+}
 
+const NewItem = props => {
+  const [userToEdit, setUserToEdit] = useState(newItem);
   const classes = useStyles();
 
-  const onSubmit = event => {
-    event.preventDefault();
-
-    Object.keys(values).forEach(property => {
-      if (!values[property]) {
-        delete values[property];
+  const saveEdit = e => {
+    e.preventDefault();
+    Object.keys(userToEdit).forEach(property => {
+      if (!userToEdit[property]) {
+        delete userToEdit[property];
       }
     });
-    axiosWithAuth
-    .post("api/item", values)
+    console.log(userToEdit)
+    axiosWithAuth()
+    .post("api/item", userToEdit)
       .then(response => {
-        console.log(response, props);
-        // localStorage.setItem("token");
-        props.history.push("/itemList");
+        console.log("posting", response.data);
+        props.history.push(`/protected`);
       })
       .catch(error => console.log("Creating Item Error", error.response));
+  };
+
+  const handleChange = event => {
+    setUserToEdit({ ...userToEdit, [event.target.name]: event.target.value });
   };
 
   return (
@@ -73,7 +76,7 @@ const Form = props => {
         city: Yup.string().required("City is Required")
       })}
     >
-      <form onSubmit={onSubmit}>
+      <form>
         <div>
           <h1>Sell An Item!</h1>
         </div>
@@ -93,7 +96,7 @@ const Form = props => {
                   label="Item Name"
                   margin="normal"
                   variant="outlined"
-                  value={values.name}
+                  value={userToEdit.name}
                   onChange={handleChange}
                 />
               </Grid>
@@ -104,7 +107,7 @@ const Form = props => {
                   label="Price"
                   margin="normal"
                   variant="outlined"
-                  value={values.price}
+                  value={userToEdit.price}
                   onChange={handleChange}
                 />
               </Grid>
@@ -115,7 +118,7 @@ const Form = props => {
                   label="City"
                   variant="outlined"
                   margin="normal"
-                  value={values.city}
+                  value={userToEdit.city}
                   onChange={handleChange}
                 />
               </Grid>
@@ -126,7 +129,7 @@ const Form = props => {
                   label="Country"
                   variant="outlined"
                   margin="normal"
-                  value={values.country}
+                  value={userToEdit.country}
                   onChange={handleChange}
                 />
               </Grid>
@@ -135,28 +138,27 @@ const Form = props => {
                   className={classes.TextField}
                   name="description"
                   label="Description"
-                  margin="normal"
                   variant="outlined"
-                  value={values.name}
+                  margin="normal"
+                  value={userToEdit.description}
                   onChange={handleChange}
                 />
               </Grid>
             </Grid>
           </Box>
         </div>
-        <Link to="/confirm">
-          <Button 
-          type="submit" 
-          variant="contained" 
+        <Button
+          type="submit"
+          variant="contained"
           color=""
           textDecoration="none"
-          >
-            Submit!
-          </Button>
-        </Link>
+          onClick={saveEdit}
+        >
+          Submit!
+        </Button>
       </form>
     </Formik>
   );
 };
 
-export default Form;
+export default NewItem

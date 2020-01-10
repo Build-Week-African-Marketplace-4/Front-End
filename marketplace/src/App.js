@@ -5,29 +5,26 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Register from "./components/Register"
 import Dashboard from "./components/Dashboard"
 import PrivateRoute from "./components/PrivateRoute";
-import AddItem from "./components/AddItem";
-import Form from "./components/NewItem";
+import NewItem from "./components/NewItem";
 import ItemsList from "./components/ItemsList";
 import Navigation from "./components/Navigation";
+import EditItem from "./components/EditItem"
 
 function App() {
   const [item, setItem] = useState([]);
   return (
     <Router>
-      <Navigation/>
+      <Navigation />
       <div className="App">
         <Switch>
           <PrivateRoute path="/protected" component={Dashboard} />
           <Route path="/login" component={Login} />
           <Route exact path="/" component={Register} />
-          <Route
-            path="/addItem/:id"
-            render={props => (
-              <AddItem {...props} setItem={setItem} item={item} />
+          <Route path="/itemsList" component={ItemsList} />
+          <Route path="/newItem" component= {NewItem} />
+          <Route path="/edititem" component = {EditItem}/>
             )}
           />
-          <Route path="/newItem" component={Form} />
-          <Route path="/itemsList" component={ItemsList} />
         </Switch>
       </div>
     </Router>
