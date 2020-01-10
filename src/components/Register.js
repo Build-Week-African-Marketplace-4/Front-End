@@ -20,32 +20,20 @@ const Register = props => {
   };
 
   const useStyles = makeStyles(theme => ({
-    root: {
-      display: "flex",
-      flexWrap: "wrap",
-      flexDirection: "column"
-    },
     textField: {
       width: 375
     },
-  }));
+    register: {
+    width: 33,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
+    margin: "auto",
+  
+}
 
-//   const theme = createMuiTheme({
-//     palette: {
-//       primary: {
-//         light: "#757ce8",
-//         main: "#3f50b5",
-//         dark: "#002884",
-//         contrastText: "#fff"
-//       },
-//       secondary: {
-//         light: "#ff7961",
-//         main: "#f44336",
-//         dark: "#ba000d",
-//         contrastText: "#000"
-//       }
-//     }
-//   });
+  }));
 
   const classes = useStyles();
 
@@ -64,8 +52,8 @@ const Register = props => {
 
   return (
     <>
-      <Paper>
-        <div className="register">
+      <Paper elevation={0}>
+        <div className={classes.register}>
           <form onSubmit={onSubmit}>
             <TextField
               name="username"
@@ -76,7 +64,6 @@ const Register = props => {
               value={values.username}
               onChange={handleChange}
             />
-
             <TextField
               name="email"
               label="Email"
@@ -87,7 +74,6 @@ const Register = props => {
               value={values.email}
               onChange={handleChange}
             />
-
             <TextField
               name="password"
               label="Password"
@@ -102,22 +88,17 @@ const Register = props => {
             <Button
               type="submit"
               variant="contained"
-              className="button"
+              className="classes.button"
             >
               Register
             </Button>
-          </form>
-
-          <div className="login">
             <Typography variant="subtitle2">Already signed up?</Typography>
             <Link to="/login">
-              <Button 
-                color="primary" 
-                onClick={() => console.log("clicked")}>
+              <Button color="primary" onClick={() => console.log("clicked")}>
                 Log In
               </Button>
             </Link>
-          </div>
+          </form>
         </div>
       </Paper>
     </>

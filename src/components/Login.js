@@ -31,18 +31,24 @@ const Login = props => {
     },
     button: {
       width: 100,
+      marginTop: 0,
+      marginLeft: 0,
+      height: 55
+    },
+    buttons: {
+      width: 100,
       marginTop: 16,
       marginLeft: 5,
       height: 55
-    
     },
     text: {
       marginLeft: 5,
       width: 150,
-      padding: 0 
+      padding: 0
     },
     top: {
-      marginTop: 50
+      display: "flex",
+      justifyContent: "center"
     }
   }));
 
@@ -64,9 +70,9 @@ const Login = props => {
 
   return (
     <>
-      <Paper elevation={20} >
+      <Paper elevation={20}>
         <div className="login-form">
-          <form className="form" className = {classes.top} onSubmit={onSubmit}>
+          <form className="form" className={classes.top} onSubmit={onSubmit}>
             <TextField
               name="username"
               label="Username"
@@ -92,20 +98,18 @@ const Login = props => {
               type="submit"
               variant="contained"
               color="primary"
-              className={classes.button}
+              className={classes.buttons}
               onClick={() => console.log("clicked")}
             >
               Log In
             </Button>
-            <Typography variant="subtitle2">Not signed up?</Typography>
           </form>
-          <div>
-            <Link to="/">
-              <Button color="primary" type="submit" className={classes.button}>
-                Register
-              </Button>
-            </Link>
-          </div>
+          <Typography variant="subtitle2">Not signed up?</Typography>
+          <Link to="/">
+            <Button color="primary" type="submit" className={classes.button}>
+              Register
+            </Button>
+          </Link>
         </div>
       </Paper>
     </>
